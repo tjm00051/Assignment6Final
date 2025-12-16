@@ -21,16 +21,7 @@ namespace Assignment6Final
 
         private void RefreshGrid()
         {
-            personBindingSource.DataSource = _dataSource.GetPeople().ToList();
-
-            if (dataGridView1.Columns.Contains("Id"))
-                dataGridView1.Columns["Id"].Visible = false;
-
-            txtName.DataBindings.Clear();
-            txtPhone.DataBindings.Clear();
-
-            txtName.DataBindings.Add("Text", personBindingSource, "Name", true, DataSourceUpdateMode.OnPropertyChanged);
-            txtPhone.DataBindings.Add("Text", personBindingSource, "Phone", true, DataSourceUpdateMode.OnPropertyChanged);
+            personBindingSource.DataSource = _dataSource.GetPeople(txtSearch.Text);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -63,7 +54,7 @@ namespace Assignment6Final
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            personBindingSource.DataSource = _dataSource.GetPeople(txtSearch.Text).ToList();
+            RefreshGrid();
         }
     }
 }
